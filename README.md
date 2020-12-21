@@ -47,7 +47,7 @@
 - has_one    :sips_address
 
 
-## sips_address テーブル
+## sips_addresses テーブル
 | Column          | Type       | Options                        |
 | --------------- | ---------- | ------------------------------ |
 | post_code       | string     | null: false                    |
