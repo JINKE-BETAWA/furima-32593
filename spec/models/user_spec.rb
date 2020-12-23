@@ -6,6 +6,10 @@ describe User do
 
   describe '新規登録' do
     context 'ユーザー情報' do
+      it 'すべての情報が正しいこと' do
+        expect(@user).to be_valid
+      end
+
       it 'nicknameが必須であること' do
         @user.nickname = ''
         @user.valid?
