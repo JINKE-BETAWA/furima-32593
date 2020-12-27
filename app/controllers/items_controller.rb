@@ -7,13 +7,6 @@ class ItemsController < ApplicationController
 
   def new
     @item = Item.new
-
-    @category = Category.all
-    @state = State.all
-    @cost = Cost.all
-    @area = Area.all
-    @day = Day.all
-
   end
 
   def create
