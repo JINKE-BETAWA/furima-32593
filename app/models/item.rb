@@ -3,7 +3,12 @@ class Item < ApplicationRecord
   with_options presence: true do
     validates :name
     validates :description
-    validates :price
+    validates :price, format: { with: /\A[a-z0-9]+\z/i, message: ''},
+      :numericality => {
+      :greater_than_or_equal_to => 300,
+      :less_than_or_equal_to => 9999999,
+      :message => ''
+      }
   end
 
   validates :category_id, numericality: { other_than: 1 }
