@@ -12,7 +12,6 @@ RSpec.describe Item, type: :model do
       end
     end
 
-    
     context '商品出品ができない時' do
       it 'image1枚つけることが必須であること' do
         @item.image = nil
