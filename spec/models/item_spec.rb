@@ -28,22 +28,10 @@ RSpec.describe Item, type: :model do
       expect(@item.errors.full_messages).to include("Description can't be blank")
     end
 
-    it 'category_idが必須であること' do
-      @item.category_id = ''
-      @item.valid?
-      expect(@item.errors.full_messages).to include('Category Select')
-    end
-
     it 'category_idが1では保存できない' do
       @item.category_id = 1
       @item.valid?
       expect(@item.errors.full_messages).to include('Category Select')
-    end
-
-    it 'state_idが必須であること' do
-      @item.state_id = ''
-      @item.valid?
-      expect(@item.errors.full_messages).to include('State Select')
     end
 
     it 'state_idが1では保存できない' do
@@ -52,34 +40,16 @@ RSpec.describe Item, type: :model do
       expect(@item.errors.full_messages).to include('State Select')
     end
 
-    it 'cost_idが必須であること' do
-      @item.cost_id = ''
-      @item.valid?
-      expect(@item.errors.full_messages).to include('Cost Select')
-    end
-
     it 'cost_idが1では保存できない' do
       @item.cost_id = 1
       @item.valid?
       expect(@item.errors.full_messages).to include('Cost Select')
     end
 
-    it 'area_idが必須であること' do
-      @item.area_id = ''
-      @item.valid?
-      expect(@item.errors.full_messages).to include('Area Select')
-    end
-
     it 'area_idが1では保存できない' do
       @item.area_id = 1
       @item.valid?
       expect(@item.errors.full_messages).to include('Area Select')
-    end
-
-    it 'day_idが必須であること' do
-      @item.day_id = ''
-      @item.valid?
-      expect(@item.errors.full_messages).to include('Day Select')
     end
 
     it 'day_idが1では保存できない' do
