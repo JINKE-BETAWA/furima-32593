@@ -10,11 +10,13 @@ class Item < ApplicationRecord
                       }
   end
 
-  validates :category_id, numericality: { other_than: 1, message:'Select'}
-  validates :state_id, numericality: { other_than: 1, message:'Select' }
-  validates :cost_id, numericality: { other_than: 1, message:'Select' }
-  validates :area_id, numericality: { other_than: 1, message:'Select' }
-  validates :day_id, numericality: { other_than: 1, message:'Select' }
+  with_options numericality: { other_than: 1, message:'Select'} do
+    validates :category_id
+    validates :state_id
+    validates :cost_id
+    validates :area_id
+    validates :day_id
+  end
 
   has_one          :purchase
   belongs_to       :user
