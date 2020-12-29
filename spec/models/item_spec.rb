@@ -1,132 +1,85 @@
 require 'rails_helper'
-describe Item do
-  before do
-    @item = FactoryBot.build(:item)
-  end
 
-  describe '' do
-    context 'ユーザー情報' do
-      it 'すべての情報が正しいこと' do
-        expect(@user).to be_valid
-      end
-
-      it 'nicknameが必須であること' do
-        @user.nickname = ''
-        @user.valid?
-        expect(@user.errors.full_messages).to include("Nickname can't be blank")
-      end
-
-      it 'emailが必須であること' do
-        @user.email = ''
-        @user.valid?
-        expect(@user.errors.full_messages).to include("Email can't be blank")
-      end
-
-      it 'emailが一意性であること' do
-        @user.password = 'A123456'
-        @user.password_confirmation = 'A123456'
-        @user.save
-        another_user = FactoryBot.build(:user)
-        another_user.email = @user.email
-        another_user.valid?
-        expect(another_user.errors.full_messages).to include('Email has already been taken')
-      end
-
-      it 'emailは＠を含む必要があること' do
-        @user.email = '1111111'
-        @user.valid?
-        expect(@user.errors.full_messages).to include('Email is invalid')
-      end
-
-      it 'passwordが必須であること' do
-        @user.password = ''
-        @user.valid?
-        expect(@user.errors.full_messages).to include("Password can't be blank")
-      end
-
-      it 'passwordは6文字以上での入力が必須であること' do
-        @user.password = '1234a'
-        @user.password_confirmation = '1234a'
-        @user.valid?
-        expect(@user.errors.full_messages).to include('Password is too short (minimum is 6 characters)')
-      end
-
-      it 'passwordは半角英数字混合での入力が必須であること' do
-        @user.password = '123456'
-        @user.password_confirmation = '123456'
-        @user.valid?
-        expect(@user.errors.full_messages).to include('Password Include both letters and numbers')
-      end
-
-      it 'passwordは確認用を含めて2回入力すること' do
-        @user.password = 'a12345'
-        @user.password_confirmation = ''
-        @user.valid?
-        expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
-      end
-
-      it 'passwordとpassword_confirmation、値の一致が必須であること' do
-        @user.password = 'a123456'
-        @user.password_confirmation = 'a654321'
-        @user.valid?
-        expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
-      end
+RSpec.describe Item, type: :model do
+  describe '#create' do
+    before do
+      @item = FactoryBot.build(:item)
     end
 
-    context '本人情報確認' do
-      it 'ユーザー本名はfirst_nameが必須であること' do
-        @user.first_name = ''
-        @user.valid?
-        expect(@user.errors.full_messages).to include("First name can't be blank")
-      end
+    it '必要な情報を適切に入力すると、商品の出品ができること' do
+      expect(@item).to be_valid
+    end
 
-      it 'ユーザー本名はlast_nameが必須であること' do
-        @user.last_name = ''
-        @user.valid?
-        expect(@user.errors.full_messages).to include("Last name can't be blank")
-      end
+    it 'image1枚つけることが必須であること' do
+      @item.image = nil
+      @item.valid?
+      expect(@item.errors.full_messages).to include("Image can't be blank")
+    end
 
-      it 'ユーザー本名first_nameは全角(漢字・ひらがな・カタカナ)での入力が必須であること' do
-        @user.first_name = 'ｱｱｱ'
-        @user.valid?
-        expect(@user.errors.full_messages).to include('First name Full-width characters')
-      end
+    it 'nameが必須であること' do
+      @item.name = ''
+      @item.valid?
+      expect(@item.errors.full_messages).to include("Name can't be blank")
+    end
 
-      it 'ユーザー本名last_nameは全角(漢字・ひらがな・カタカナ)での入力が必須であること' do
-        @user.last_name = 'ｱｱｱ'
-        @user.valid?
-        expect(@user.errors.full_messages).to include('Last name Full-width characters')
-      end
+    it 'descriptionが必須であること' do
+      @item.description = ''
+      @item.valid?
+      expect(@item.errors.full_messages).to include("Description can't be blank")
+    end
 
-      it 'ユーザー本名のフリガナ、kane_first_nameが必須であること' do
-        @user.kane_first_name = ''
-        @user.valid?
-        expect(@user.errors.full_messages).to include("Kane first name can't be blank")
-      end
+    it 'category_idが必須であること' do
+      @item.category_id = ''
+      @item.valid?
+      expect(@item.errors.full_messages).to include('Category Select')
+    end
 
-      it 'ユーザー本名のフリガナ、kane_last_nameが必須であること' do
-        @user.kane_last_name = ''
-        @user.valid?
-        expect(@user.errors.full_messages).to include("Kane last name can't be blank")
-      end
+    it 'state_idが必須であること' do
+      @item.state_id = ''
+      @item.valid?
+      expect(@item.errors.full_messages).to include('State Select')
+    end
 
-      it 'ユーザー本名のkane_first_nameは全角(カタカナ)での入力が必須であること' do
-        @user.kane_first_name = 'あああ'
-        @user.valid?
-        expect(@user.errors.full_messages).to include('Kane first name Full-width katakana characters')
-      end
+    it 'cost_idが必須であること' do
+      @item.cost_id = ''
+      @item.valid?
+      expect(@item.errors.full_messages).to include('Cost Select')
+    end
 
-      it 'ユーザー本名のkane_last_nameは全角(カタカナ)での入力が必須であること' do
-        @user.kane_last_name = 'あああ'
-        @user.valid?
-        expect(@user.errors.full_messages).to include('Kane last name Full-width katakana characters')
-      end
+    it 'area_idが必須であること' do
+      @item.area_id = ''
+      @item.valid?
+      expect(@item.errors.full_messages).to include('Area Select')
+    end
 
-      it '生年月日が必須であること' do
-        @user.birthday = ''
-        @user.valid?
-        expect(@user.errors.full_messages).to include("Birthday can't be blank")
-      end
+    it 'day_idが必須であること' do
+      @item.day_id = ''
+      @item.valid?
+      expect(@item.errors.full_messages).to include('Day Select')
+    end
+
+    it 'priceが必須であること' do
+      @item.price = ''
+      @item.valid?
+      expect(@item.errors.full_messages).to include("Price can't be blank")
+    end
+
+    it 'priceの範囲が¥300~¥9,999,999の間で,¥300以下の場合' do
+      @item.price = 100
+      @item.valid?
+      expect(@item.errors.full_messages).to include('Price Out of setting range')
+    end
+
+    it 'priceの範囲が¥300~¥9,999,999の間で,¥9,999,999以上の場合' do
+      @item.price = 10000000
+      @item.valid?
+      expect(@item.errors.full_messages).to include('Price Out of setting range')
+    end
+
+    it 'price半角数字のみ保存可能であること' do
+      @item.price = '９９９'
+      @item.valid?
+      expect(@item.errors.full_messages).to include('Price Half-width number')
     end
   end
 end
