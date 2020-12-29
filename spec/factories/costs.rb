@@ -1,2 +1,0 @@
-factory :cost do
-end

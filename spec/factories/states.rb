@@ -1,2 +1,0 @@
-factory :state do
-end
