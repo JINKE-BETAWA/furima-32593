@@ -8,7 +8,7 @@ window.addEventListener('load', () => {
 
     const profit = document.getElementById("profit");
       const result = inputValue / 10
-      profit.innerHTML = (Math.floor(inputValue - result));
+            profit.innerHTML = (Math.floor(inputValue - result));
 
   })
 });
