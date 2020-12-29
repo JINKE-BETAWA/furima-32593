@@ -1,2 +1,2 @@
-  factory :cost do
-  end
+factory :cost do
+end

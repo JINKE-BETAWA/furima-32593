@@ -1,2 +1,2 @@
-  factory :day do
-  end
+factory :day do
+end

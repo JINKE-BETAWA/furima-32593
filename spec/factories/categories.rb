@@ -1,2 +1,2 @@
-  factory :category do
-  end
+factory :category do
+end

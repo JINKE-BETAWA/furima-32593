@@ -1,2 +1,2 @@
-  factory :area do
-  end
+factory :area do
+end

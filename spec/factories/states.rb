@@ -1,2 +1,2 @@
-  factory :state do
-  end
+factory :state do
+end
