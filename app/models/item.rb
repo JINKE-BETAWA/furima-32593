@@ -5,12 +5,12 @@ class Item < ApplicationRecord
     validates :description
     validates :price, numericality: { with: /\A[0-9]+\z/, message: 'Half-width number' },
                       inclusion: {
-                        in: (300..9999999),
+                        in: (300..9_999_999),
                         message: 'Out of setting range'
                       }
   end
 
-  with_options numericality: { other_than: 1, message:'Select'} do
+  with_options numericality: { other_than: 1, message: 'Select' } do
     validates :category_id
     validates :state_id
     validates :cost_id
