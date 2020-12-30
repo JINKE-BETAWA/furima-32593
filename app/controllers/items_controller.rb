@@ -42,9 +42,7 @@ class ItemsController < ApplicationController
 
   def set_root
     @item = Item.find(params[:id])
-    if user_signed_in? && current_user.id != @item.user_id
-      redirect_to root_path
-    end
+    redirect_to root_path if user_signed_in? && current_user.id != @item.user_id
   end
 
   def item_params
