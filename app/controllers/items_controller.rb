@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
-  before_action :set_item, only: [:show, :edit, :update]
+  before_action :set_item, only: [:show, :edit, :update, :destroy]
   before_action :set_root, only: [:edit, :update]
 
   def index
@@ -34,6 +34,14 @@ class ItemsController < ApplicationController
     end
   end
 
+  def destroy
+    begin @item.destroy
+      redirect_to root_path
+    rescue => exception
+      puts "削除できません"
+    end
+  end
+
   private
 
   def set_item
@@ -41,9 +49,7 @@ class ItemsController < ApplicationController
   end
 
   def set_root
-    if current_user.id != @item.user_id
-      redirect_to root_path
-    end
+    redirect_to root_path if current_user.id != @item.user_id
   end
 
   def item_params
