@@ -35,8 +35,11 @@ class ItemsController < ApplicationController
   end
 
   def destroy
-    @item.destroy
-    redirect_to root_path
+    begin @item.destroy
+      redirect_to root_path
+    rescue => exception
+      puts "削除できません"
+    end
   end
 
   private
