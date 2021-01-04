@@ -1,0 +1,2 @@
+class SipsAddress < ApplicationRecord
+end
