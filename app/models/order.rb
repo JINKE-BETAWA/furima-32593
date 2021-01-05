@@ -1,4 +1,4 @@
-class Oder
+class Order
 
   include ActiveModel::Model
   attr_accessor :user_id, :item_id, :post_code, :area_id, :city, :street_number, :building_number, :phone_number
