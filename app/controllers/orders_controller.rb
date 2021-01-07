@@ -4,7 +4,7 @@ class OrdersController < ApplicationController
 
   def index
     @item_order = Order.new
-    if current_user == @item.user
+    if current_user == @item.user or @item.purchase.presence
       redirect_to root_path
     end
   end
@@ -37,7 +37,7 @@ class OrdersController < ApplicationController
   end
 
   def set_item
-    @item = Item.find(params[:id])
+    @item = Item.find(params[:item_id])
   end
 
 end
