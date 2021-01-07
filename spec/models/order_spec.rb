@@ -14,9 +14,9 @@ RSpec.describe Order, type: :model do
 
     context '商品購入ができない時' do
       it 'クレジットカード情報は必須であり、正しいクレジットカードの情報で無いときは決済できない事' do
-
-
-
+        @item_order.token = ''
+        @item_order.valid?
+        expect(@item_order.errors.full_messages).to include("Token can't be blank")
       end
 
       it '配送先の情報として、郵便番号が必須である事' do

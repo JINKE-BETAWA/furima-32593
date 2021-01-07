@@ -1,7 +1,7 @@
 class Order
 
   include ActiveModel::Model
-  attr_accessor :user_id, :item_id, :post_code, :area_id, :city, :street_number, :building_number, :phone_number
+  attr_accessor :user_id, :item_id, :post_code, :area_id, :city, :street_number, :building_number, :phone_number, :token, :item_price
 
   with_options presence: true do
     validates :user_id
@@ -11,6 +11,7 @@ class Order
     validates :city
     validates :street_number
     validates :phone_number, format: { with: /\A\d{11}\z/, message: "is invalid" }
+    validates :token
   end
 
   def save
