@@ -26,15 +26,15 @@ RSpec.describe Order, type: :model do
       end
 
       it '郵便番号にはハイフンが必要である事（123-4567となる）' do
-        @item_order.post_code = 1234567
+        @item_order.post_code = 1_234_567
         @item_order.valid?
-        expect(@item_order.errors.full_messages).to include("Post code is invalid. Include hyphen(-)")
+        expect(@item_order.errors.full_messages).to include('Post code is invalid. Include hyphen(-)')
       end
 
       it '配送先の情報として、都道府県が必須である事' do
         @item_order.area_id = ''
         @item_order.valid?
-        expect(@item_order.errors.full_messages).to include("Area Select")
+        expect(@item_order.errors.full_messages).to include('Area Select')
       end
 
       it '配送先の情報として、市区町村が必須である事' do
@@ -58,9 +58,8 @@ RSpec.describe Order, type: :model do
       it '電話番号にはハイフンは不要で、11桁以内である事（09012345678となる）' do
         @item_order.phone_number = '0901234567899999'
         @item_order.valid?
-        expect(@item_order.errors.full_messages).to include("Phone number is invalid")
+        expect(@item_order.errors.full_messages).to include('Phone number is invalid')
       end
     end
-
   end
 end
