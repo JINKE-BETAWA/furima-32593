@@ -3,7 +3,9 @@ require 'rails_helper'
 RSpec.describe Order, type: :model do
   describe '#create' do
     before do
-      @item_order = FactoryBot.build(:order)
+      @user = FactoryBot.create(:user)
+      @item = FactoryBot.create(:item)
+      @item_order = FactoryBot.build(:order, item_id: @item.id, user_id: @user.id)
     end
 
     context '商品購入ができる時' do
@@ -26,7 +28,7 @@ RSpec.describe Order, type: :model do
       end
 
       it '郵便番号にはハイフンが必要である事（123-4567となる）' do
-        @item_order.post_code = 1_234_567
+        @item_order.post_code = '1234567'
         @item_order.valid?
         expect(@item_order.errors.full_messages).to include('Post code is invalid. Include hyphen(-)')
       end
